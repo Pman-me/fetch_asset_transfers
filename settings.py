@@ -7,3 +7,5 @@ class Settings(BaseSettings):
     API_KEY: Optional[str]
     CHAIN: Optional[str]
     PB_ADDR: Optional[str]
+    CONTRACT_ADDR: Optional[str]
+    PRICE_TRACKER_API_URL: Optional[str]

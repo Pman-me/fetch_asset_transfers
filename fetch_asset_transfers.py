@@ -3,15 +3,16 @@ from datetime import datetime
 
 import requests
 from web3 import Web3
+from web3.middleware import geth_poa_middleware
 
-from constants import data
+from constants import chain_rpc_map
 from settings import Settings
 
 settings = Settings()
 
 
 def fetch_tx(chain: str, api_key: str, from_addr: str):
-    base_url = f"https://{data[chain][0]}.g.alchemy.com/v2/{api_key}"
+    base_url = f"https://{chain_rpc_map[chain][0]}.g.alchemy.com/v2/{api_key}"
 
     payload = {
         "id": 1,
@@ -44,7 +45,8 @@ def parse_tx(chain: str, res):
         headers = ['transaction_hash', 'timestamp', 'from', 'to', 'tokenType', 'value']
         f_csv.writerow(headers)
 
-        w3 = Web3(Web3.HTTPProvider(data[chain][1]))
+        w3 = Web3(Web3.HTTPProvider(chain_rpc_map[chain][1]))
+        w3.middleware_onion.inject(geth_poa_middleware, layer=0)
 
         for tx in res['result']['transfers']:
             block = w3.eth.get_block(tx['blockNum'])
