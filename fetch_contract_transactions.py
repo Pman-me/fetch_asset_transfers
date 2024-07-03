@@ -11,7 +11,7 @@ from settings import Settings
 settings = Settings()
 
 
-def fetch_tx(chain: str, api_key: str, from_addr: str):
+def fetch_tx(chain: str, api_key: str, contract_addr: str):
     base_url = f"https://{chain_rpc_map[chain][0]}.g.alchemy.com/v2/{api_key}"
 
     payload = {
@@ -22,7 +22,7 @@ def fetch_tx(chain: str, api_key: str, from_addr: str):
             {
                 "fromBlock": "0x0",
                 "toBlock": "latest",
-                "fromAddress": from_addr,
+                "fromAddress": contract_addr,
                 "category": ["external", "erc20", "erc721", "erc1155"],
                 "withMetadata": False,
                 "excludeZeroValue": True
