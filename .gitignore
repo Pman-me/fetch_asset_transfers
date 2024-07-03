@@ -54,3 +54,5 @@ node_modules
 ws_vars
 ./contract_addresses.json
 web3-event-listener/pnpm-lock.yaml
+
+*.csv
