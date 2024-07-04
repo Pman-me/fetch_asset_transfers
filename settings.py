@@ -9,3 +9,5 @@ class Settings(BaseSettings):
     PB_ADDR: Optional[str]
     CONTRACT_ADDR: Optional[str]
     PRICE_TRACKER_API_URL: Optional[str]
+    WEBSOCKET_URL: Optional[str]
+    TX_STATUS: Optional[str]
